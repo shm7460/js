@@ -343,6 +343,90 @@ alert(1==1)  //true라는 값이나옴
 
   - 아이디와 비밀번호 물어보는 경고문
 
+**논리 연산자 ** 
+
+&& : 좌항과 우항이 모두 true일때만 true가된다  (and  연산자라고 한다.)
+
+- ```js
+  if (true && true) {
+      alert(1) 
+  }                      // 1
+  if (false && false) {
+      alert(2)  
+  }                     // 작동하지않음
+  if(true && false) {
+      alert(1) 
+  }                    // 작동하지않음
+  ```
+
+  - 하나라도 false가 있으면 작동하지않는다 
+
+||: 좌우항 중에 하나라도 true이면 true가 된다 (or 연산자라고 한다.)
+
+- ```js
+  if (true ||false) {
+      alert(5)
+  }                    //5
+  if (true ||true) {
+      alert(5)
+  }                    //5
+  ```
+
+  - 하나라도 true가 있으면 실행이된다
+
+**논리연산자 응용**
+
+- ```js
+   const id = prompt("아이디를 입력해주세요.");
+        const password = prompt("비밀번호를 입력해주세요");
+        if (
+          (id === "hello123" || id === "hahaha" || id === "hi123") &&
+          password === "123"
+        ) {
+          alert("인증했습니다👍");
+        } else {
+          alert("인증에 실패했습니다.😭");
+        }
+  ```
+
+!: 부정의 의미로 Boolean의 값을 역전시킨다. true를 false로 false는 true로 만든다. (not연산자 이다.)
+
+- ```js
+  if (!false && !false){
+      alert("안녕")}          //안녕
+  ```
+
+  - !false  ==>true이기때문에 둘다 true가 되어서  안녕이라는 경고문이 뜬다.
+
+**boolean의 대체재**
+
+- ```js
+  if (0){
+      alert("hi")}   // 실행이안됨 
+  if (1){
+      alert("hi")}   // hi     
+  ```
+
+  - js에서는 1은 true이기때문이다 
+
+- ```js
+  if (""){
+      alert("히히")}   //빈문자열은 false로 간주해서 실행이 안됨
+  //-------------------------------------------------------------------
+  if ("채움"){
+      alert("hello")}    //hello라는 경고문이 뜬다.
+  ```
+
+## 6. 반복문
+
+
+
+
+
+
+
+
+
 
 
 

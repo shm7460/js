@@ -16,16 +16,27 @@
       //   alert("아이디가 일치하지 않습니다🤔");
       // }
 
+      // const id = prompt("아이디를 입력해주세요.");
+      // if (id === "hello123") {
+      //   const password = prompt("비밀번호를 입력해주세요!");
+      //   if (password === "123") {
+      //     alert("로그인 하셨습니다👍 " + id + "님 반갑습니다");
+      //   } else {
+      //     alert("비밀번호가 다릅니다.😢");
+      //   }
+      // } else {
+      //   alert("아이디가 일치하지 않습니다.😭");
+      // }
+
       const id = prompt("아이디를 입력해주세요.");
-      if (id === "hello123") {
-        const password = prompt("비밀번호를 입력해주세요!");
-        if (password === "123") {
-          alert("로그인 하셨습니다👍 " + id + "님 반갑습니다");
-        } else {
-          alert("비밀번호가 다릅니다.😢");
-        }
+      const password = prompt("비밀번호를 입력해주세요");
+      if (
+        (id === "hello123" || id === "hahaha" || id === "hi123") &&
+        password === "123"
+      ) {
+        alert("인증했습니다👍");
       } else {
-        alert("아이디가 일치하지 않습니다.😭");
+        alert("인증에 실패했습니다.😭");
       }
     </script>
   </body>
