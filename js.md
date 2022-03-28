@@ -417,7 +417,430 @@ alert(1==1)  //true라는 값이나옴
       alert("hello")}    //hello라는 경고문이 뜬다.
   ```
 
-## 6. 반복문
+## 6. 반복
+
+**반복문의 기본문법**
+
+`while (조건) { 반복해서 실행할 코드  }`
+
+- 조건은 Boolean이어야 한다
+- 조건이 true이면 반복해서 실행된다 false가 될때 까지
+
+```js
+  while (true) {
+        document.write("coding everybody<br/>");
+      }
+```
+
+- 이렇게 무한루프 무한반복이 실행되면 브라우저가 강제로 종료를 한다 
+
+**반복조건**
+
+```js
+ let i = 0;
+      while (i < 10) {
+        document.write("coding everybody" + i + "<br/>");
+        i = i + 1;
+      }
+```
+
+- 조건문인 (i < 10)이 true일경우 계속실행되고 false일 경우 실행을 멈춘다
+
+- +i+ 하면 숫자도 같이나온다 
+
+**for 반복문법**
+
+```js
+for (let i = 0; i < 10; i = i + 1) {
+document.write("coding everybody" + i + "<br/>");
+}
+```
+
+- 조건에(초기화 파트; 언제까지 반복할것인지; 반복실행 조건 )을 넣어주면된다 
+- 마지막에는 세미클론;넣으면안됨
+
+- `i = i + 1`와 `i++`는 같은 의미 이다 .(의미는 구문이 실행될때 마다 1씩증가한다는 뜻)
+
+**i++ 와 ++i의 차이점**
+
+```js
+i=0;           //0
+alert(i++);   //0
+//--------------------------------------------------------------------------
+i=0;         //0
+alert(++i); //1
+```
+
+- i++은 0부터 증가하고 ++i는 1부터 증가한다 (1씩증가하는 것은 같다.)
+
+**i활용하기**
+
+```js
+for (let i = 0; i < 10; i = i + 1) {
+document.write("coding everybody" + (i*2) + "<br/>");
+}
+```
+
+- (i+1) 1부터 증가하게 해줌
+- (i*2) 2배수 만큼 증가됨
+
+**반복문의 제어**
+
+```js
+for (let i = 0; i < 10; i = i + 1) {
+     if (i === 5) {
+        break;
+      }
+    document.write("coding everybody" + i + "<br/>");
+    }
+```
+
+- break로 언제든지 반복문을 중단 시킬수있다
+- 반복문안에 조건문이 들어갈수있다
+
+```js
+for (let i = 0; i < 10; i = i + 1) {
+     if (i === 5) {
+        continue;
+      }
+    document.write("coding everybody" + i + "<br/>");
+    }
+```
+
+- 그순간에만 멈추고 그뒤로 계속 반복됨 그래서 다섯번째는 나타나지 않음
+
+**반복문의 중첩**
+
+```js
+for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+        document.write("coding everybody" + i + j + "<br/>");
+    }
+}
+```
+
+- `("coding everybody" + i + j + "<br/")`  문자+숫자+숫자+문자 형태는  숫자부분을 자동으로 문자 형태로 바꿔줌 그래서  i와 j부분은 문자형태가 된다.
+- i가 한번실행될때 j는 10번실행이된다 
+
+## 7. 함수
+
+**함수**:  function 함수명 ( 인자) { 코드 return 반환값  }
+
+```js
+function numbering() {
+document.write(1);
+}
+numbering();
+```
+
+- 함수 호출하기 
+- 여러 맥락에서 호출을 하면 사용할수있다 (반복문은 그안에서만 실행된다)  =재사용성
+
+```js
+function numbering() {
+ let i = 0;
+ while (i < 10) {
+ document.write(i + "<br/>");
+ i += 1;
+ }
+}
+numbering();
+```
+
+
+
+**함수 출력(return)**
+
+return은 함수의 출력값으로 반환한다
+
+return   ; 다음으로 오는 코드는 실행이 안된다 
+
+```js
+function get_member1() {
+    return "hey";
+    return "hi";
+    return "hello";
+}
+alert(get_member1());
+```
+
+- hey만 출력이 된다 
+
+
+
+**함수 입력 (인자)**
+
+```js
+function get_argument(arg) {
+        return arg;
+       }
+        alert(get_argument(1));
+        alert(get_argument(2));
+```
+
+- arg=1   /   arg=2 가된다. 그리고 arg는 변수이다.
+- arg는 매개변수 (parameter) 이다, 인자의 값은 받는다.  
+- get_argument(1)의 괄호안에 "1"은 인자 (arguments)라고 한다 
+
+**복수의 인자**
+
+```js
+function get_argument(arg1, arg2) {
+        return arg1 + arg2;
+      }
+      alert(get_argument(10, 20));
+```
+
+- arg1=10, arg2=20 이다
+
+**함수예제 종류**
+
+```js
+get_argument = function () {
+        return "hello";
+       }
+     alert(get_argument());
+```
+
+- 함수명 = function( ){      }  이렇게 함수를 적을수도 있다 
+
+```js
+(function () {
+    i = 0;
+    while (i < 10) {
+        document.write(i);
+        i += 1;
+    }
+})();
+```
+
+- 정의와 호출을 같이하는 함수 이고 이름이없는 익명함수이다 (일회성 함수)
+
+
+
+## 8. 배열
+
+array배열은 연관된 데이터를 모아서 통으로 관리하기 위한 데이터 타입이다.
+
+```js
+const member = ["a","b","c"];
+alert(member[1]);             // b
+```
+
+- 하나의 변수안에 여러개의 데이터를 담을수있다.
+- 3개의 원소(element)가 들어있는 배열이다
+- 배열의 순서는 0부터시작한다  (0,1,2,3,,,,)  =index라고 부른다 
+
+ **배열과 반복문 같이 사용**
+
+```js
+function get_member() {
+    return ["a", "b", "c", "D"];
+}
+menubars = get_member();
+
+for (let i = 0; i < menubars.length; i++) {
+    document.write(menubars[i].toUpperCase() + "<br/>");
+}
+```
+
+- menubars.length  값은  4이다.
+- 배열의 순서는 0,1,2,3까지 있다 
+- length의 값은 항상 배열보다는 1이많다 그래서 작동됨 
+
+**데이터 추가**
+
+push: 하나의 데이터를 추가할때
+
+```js
+let li=["a","b","c"];
+li.push("d")
+alert(li)           //a,b,c,d
+```
+
+concat: 여러데이터를 추가할때
+
+```js
+let li=["a","b","c"];
+li=li.concat(["d","e"]);  // (5) ['a', 'b', 'c', 'd', 'e']
+alert(li);                //a,b,c,d,e
+```
+
+unshift:  앞쪽에 데이터를 추가할때
+
+```js
+let li=["a","b","c"];
+li.unshift("z")
+alert(li);            //z,a,b,c
+```
+
+splice: 어느지점에 데이터를 추가할때
+
+```js
+let li=["a","b","c"];
+li.splice(1,0,"A")
+li                    //(4) ['a', 'A', 'b', 'c']
+```
+
+- `li.splice(1,0,"A")` :  (index번호,index에서 부터 제거될 원소들의 수 ,추가할것) 지정인덱스 앞에 추가됨.
+
+```js
+let li=["a","b","c"];
+li.splice(1,1,"z","y");
+li                     //(6) ['a', 'z', 'y','c']
+
+```
+
+- `li.splice(1,1,"z","y")`:  index의 번호가 1인 원소 부터 1개의 원소가 삭제되고 그자리에 z,y데이터가 추가 됨.
+
+**데이터 제거와 정렬**
+
+shift: 맨앞의 데이터를 제거
+
+```js
+let li=["a","b","c"];
+li.shift()           //'a'
+li                   // ['b', 'c']
+```
+
+pop: 맨뒤의 데이터를 제거
+
+```js
+let li=["a","b","c"];
+li.shift()           //'c'
+li                   // ['a', 'b']
+```
+
+sort: 배열을 정렬 해준다  (그반대 개념으로 `변수명.reverse( )` 는 정렬을 역순으로 해준다.)
+
+```js
+let li=["d","f","a","b","e"]
+li.sort()                   // ['a', 'b', 'd', 'e', 'f']
+```
+
+
+
+ ## 9. 객체
+
+```js
+const name ={"hey":10, "won":20, "jun":30};
+name                                       //{hey: 10, won: 20, jun: 30}
+```
+
+- index를 만들수있다 (hey,won,jun)
+- key와 value 이다.
+
+**다른방법들로 object 만들기**
+
+```js
+const name = {};
+name["hey"] = 10;
+name["won"] = 20;
+name["jun"] = 30;
+name                 //{hey: 10, won: 20, jun: 30}
+```
+
+```js
+const name = new Object();
+name["hey"] = 10;
+name["won"] = 20;
+name["jun"] = 30;
+name                 //{hey: 10, won: 20, jun: 30}
+```
+
+- { }와 new Object( )는 같은 의미이다.
+
+  
+
+**객체의 값을 가져오는 방법**
+
+```js
+const name ={"hey":10, "won":20, "jun":30};
+name["hey"]   // 10
+```
+
+
+
+**객체와 반복문** `for (a in b)`
+
+```js
+const grades = { hey: 10, hello: 20, hi: 30 };
+for (const name in grades) {
+    document.write("key: " + name + " value: " + grades[name] + "<br/>");
+}
+```
+
+- `for (const name in grades)`에서 name은 grades배열에서 key값을 담는다 (hey,hello,hi)
+- `grades[name]`는 객체에 저장된  value값을 담는다.
+
+
+
+**객체에 담길수 있는 값**
+
+```js
+const grades = {
+        list: { hey: 10, hello: 20, hi: 30 },
+      };
+      alert(grades["list"]["hey"]);
+```
+
+- list에 있는 hey 값을 출력함 :10
+
+```js
+ const grades = {
+        list: { hey: 10, hello: 20, hi: 30 },
+        show: function () {
+          alert("hello world");
+        },
+      };
+      grades["show"]();
+```
+
+- 객체안에는 함수도 저장될수 있다
+
+**변수 this**
+
+```js
+const grades = {
+    list: { hey: 10, hello: 20, hi: 30 },
+    show: function () {
+            for (const name in this.list) {
+            console.log(name, this.list[name]);
+            }
+        },
+	};
+grades.show();
+```
+
+- this: 자신이 속한 함수가 속해 있는 객체를 가리키는 변수이다. (this = grades)
+
+
+
+## 10. 모듈
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

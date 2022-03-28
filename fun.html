@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   function numbering() {
+      //     document.write(1);
+      //   }
+      //   numbering();
+
+      //   function numbering() {
+      //     let i = 0;
+      //     while (i < 10) {
+      //       document.write(i);
+      //       i += 1;
+      //     }
+      //   }
+      //   numbering();
+
+      //   function numbering() {
+      //     let i = 0;
+      //     while (i < 20) {
+      //       document.write(i + "<br/>");
+      //       i += 1;
+      //     }
+      //   }
+      //   for (let i = 0; i < 100; i++) {
+      //     numbering();
+      //   }
+
+      //   function get_member1() {
+      //     return "hey";
+      //     return "hi";
+      //     return "hello";
+      //   }
+      //   alert(get_member1());
+
+      //   function get_argument(arg) {
+      //     return arg;
+      //   }
+      //   alert(get_argument(1));
+      //   alert(get_argument(2));
+
+      //   function get_argument(arg1, arg2) {
+      //     return arg1 + arg2;
+      //   }
+      //   alert(get_argument(10, 20));
+
+      //   (function () {
+      //     i = 0;
+      //     while (i < 10) {
+      //       document.write(i);
+      //       i += 1;
+      //     }
+      //   })();
+
+      //   function get_member() {
+      //     return ["a", "b", "c", "D"];
+      //   }
+      //   menubars = get_member();
+      //   for (let i = 0; i < menubars.length; i++) {
+      //     document.write(menubars[i].toUpperCase() + "<br/>");
+      //   }
+
+      //   const grades = { hey: 10, hello: 20, hi: 30 };
+      //   for (const name in grades) {
+      //     document.write(
+      //       "<li>key: " + name + " value: " + grades[name] + "</li>"
+      //     );
+      //   }
+
+      const grades = {
+        list: { hey: 10, hello: 20, hi: 30 },
+        show: function () {
+          for (const name in this.list) {
+            console.log(name, this.list[name]);
+          }
+        },
+      };
+      grades.show();
+    </script>
+  </body>
+</html>
