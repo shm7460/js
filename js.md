@@ -816,23 +816,94 @@ grades.show();
 
 
 
-## 10. 모듈
+## 10. 라이브러리 사용
+
+-jQuery
+
+https://jquery.com/
 
 
 
+## 11. UI와 API
+
+- 웹브라우저 API
+
+https://developer.mozilla.org/en-US/docs/Web/API
+
+- node.js API
+
+https://nodejs.org/api/
+
+- google apps script APT
+
+https://developers.google.com/apps-script/
 
 
 
+# js for web
 
+js는 body태그가 끝나는 지점에 작성해준다
 
+```html
+<body>
+   <script src="index.js"></script>
+</body>   
+```
 
+## 전역객체 window
 
+```js
+alert('Hello world');
+window.alert('Hello world');
+```
 
+- Window 객체는 식별자 window를 통해서 얻을 수 있다. 또한 생략 가능하다. 
+- Window 객체의 메소드인 alert을 호출하는 방법은 두가지 있고 둘다같은 의미이다
+- 모든 객체는 사실 window의 자식이라는 것도 알 수 있다. 
 
+## alert
 
+```js
+<input type="button" value="alert" onclick="alert('hello world');" />
+```
 
+- 경고창이라고 부른다. 사용자에게 정보를 제공하거나 디버깅등의 용도로 많이 사용한다.
 
+## confirm
 
+```html
+<body>
+    <input type="button" value="confirm" onclick="funcConfirm()" />
+    <script>
+      function funcConfirm() {
+        if (confirm("확인하시겠습니까?")) {
+          alert("ok");
+        } else {
+          alert("cancel");
+        }
+      }
+    </script>
+  </body>
+```
+
+- 확인을 누르면 true, 취소를 누르면 false를 리턴한다
+
+## prompt
+
+```html
+<body>
+    <input type="button" value="prompt" onclick="funcPrompt()" />
+    <script>
+      function funcPrompt() {
+        if (prompt("아디이를 입력해주세요") === "hye") {
+          alert("환영합니다.");
+        } else {
+          alert("아이디를 다시 입력해 주세요");
+        }
+      }
+    </script>
+  </body>
+```
 
 
 
