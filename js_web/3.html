@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li class="green">3</li>
+      <li id="wheat">7</li>
+    </ul>
+
+    <script>
+      const red = document.getElementsByTagName("ul")[0];
+      red.style.color = "red";
+      const blue = red.getElementsByTagName("li")[1];
+      blue.style.color = "blue";
+
+      const green = document.getElementsByClassName("green")[0];
+      green.style.color = "green";
+
+      const wheat = document.getElementById("wheat");
+      wheat.style.color = "wheat";
+
+      const baColor = document.querySelector(".green");
+      baColor.style.backgroundColor = "black";
+    </script>
+  </body>
+</html>

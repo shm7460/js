@@ -1026,4 +1026,102 @@ console.dir(navigator.appVersion);
 
 - 브라우저의 현재 버전을 알수있다
 
-## 제어대상을 찾기
+## getElementsByTagName
+
+```html
+<body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+
+    <script>
+      const red = document.getElementsByTagName("ul")[0];
+      red.style.color = "red";
+      const blue = red.getElementsByTagName("li")[1];
+      blue.style.color = "blue";
+    </script>
+  </body>
+```
+
+- `document.getElementsByTagName("ul")[0]` : ul태그중 첫번째 index의 색을 바꾼다는 뜻
+
+## getElementsByClassName
+
+```html
+ <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li class="green">3</li>
+      <li id="wheat">7</li>
+    </ul>
+
+    <script>
+      const green = document.getElementsByClassName("green")[0];
+      green.style.color = "green";
+    </script>
+  </body>
+```
+
+## getElementById
+
+```html
+ <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li class="green">3</li>
+      <li id="wheat">7</li>
+    </ul>
+
+    <script>
+      const wheat = document.getElementById("wheat");
+      wheat.style.color = "wheat";
+    </script>
+  </body>
+```
+
+## querySelector
+
+```html
+ <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li class="green">3</li>
+      <li id="wheat">7</li>
+    </ul>
+
+    <script>
+     const baColor = document.querySelector(".green");
+      baColor.style.backgroundColor = "black";
+    </script>
+  </body>
+```
+
+- querySelectorAll  관련된 모든 객체를 조회해준다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
