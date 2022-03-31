@@ -1103,9 +1103,37 @@ console.dir(navigator.appVersion);
 
 - querySelectorAll  관련된 모든 객체를 조회해준다.
 
+# jQuery
 
+```js
+$("li").css("color","red");
+```
 
+- $()는 jQuery의 함수이다. 이 함수의 인자로 CSS 선택자(li)를 전달하면 jQuery 객체라는 것을 리턴한다
 
+```js
+const lis = document.getElementsByClassName('active');
+for(var i=0; i &lt; lis.length; i++){
+    lis[i].style.color='red'; 
+```
+
+```js
+$('.active').css('color', 'red')</pre>
+```
+
+- 둘다 같은 의미이고 위:js 아래:jQ이다.
+
+```js
+const li = document.getElementById('active');
+li.style.color='red';
+li.style.textDecoration='underline';</pre>
+```
+
+```js
+$('#active').css('color', 'red').css('textDecoration', 'underline');
+```
+
+- 둘다 같은 의미이고 위:js 아래:jQ이다.
 
 
 
