@@ -445,7 +445,6 @@ alert(1==1)  //true라는 값이나옴
 ```
 
 - 조건문인 (i < 10)이 true일경우 계속실행되고 false일 경우 실행을 멈춘다
-
 - +i+ 하면 숫자도 같이나온다 
 
 **for 반복문법**
@@ -521,6 +520,54 @@ for (let i = 0; i < 10; i++) {
 
 - `("coding everybody" + i + j + "<br/")`  문자+숫자+숫자+문자 형태는  숫자부분을 자동으로 문자 형태로 바꿔줌 그래서  i와 j부분은 문자형태가 된다.
 - i가 한번실행될때 j는 10번실행이된다 
+
+## for 구구단
+
+```html
+<body>
+    <script>
+      for (let i = 1; i < 10; i++) {
+        for (let j = 1; j < 10; j++) {
+          document.write("<h4>" + i + "x" + j + "=" + i * j + "</h4>");
+        }
+      }
+    </script>
+  </body>
+```
+
+## for 짝수
+
+```html
+ <head>
+ <style>
+      .first {
+        display: flex;
+      }
+      span {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="first">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <script>
+      const red = document.querySelectorAll("span");
+      for (let i = 1; i < red.length; i++) {
+        if (i % 2 === 1) {
+          red[i].style.backgroundColor = "red";
+        }
+      }
+    </script>
+  </body>
+```
+
+- `i % 2`  나머지를 구하는 연산자이다 (i를 2로 나눴을 때 나머지)
 
 ## 7. 함수
 
@@ -616,7 +663,35 @@ get_argument = function () {
 
 - 정의와 호출을 같이하는 함수 이고 이름이없는 익명함수이다 (일회성 함수)
 
+## 함수_계산기
 
+```html
+ <script>
+      const A = Number(prompt("숫자A를 입력하세요"));
+      const B = prompt("연산자를 입력하세요 ex)+,-,*,/");
+      const C = Number(prompt("숫자B를 입력하세요"));
+
+      function promptCa(first, operator, second1) {
+        if (operator === "+") {
+          alert(first + second);
+        } else if (operator === "-") {
+          alert(first - second);
+        } else if (operator === "*") {
+          alert(first * second);
+        } else {
+          alert(first / second);
+        }
+      }
+
+      promptCa(A, B, C);
+    </script>
+```
+
+- 인자값 operator 안에는 문자열 형태의 연산자가 들어온다.
+
+-  `if (operator === "비행기") { alert(first + second);  }`는
+
+  1입력하고 비행기 입력하고 3 입력하면 4가 출력된다. 
 
 ## 8. 배열
 
@@ -905,27 +980,50 @@ window.alert('Hello world');
   </body>
 ```
 
+## location
 
+```js
+console.log(location.toString(), location.href);   
+```
 
+- 아래는 현재 윈도우의 문서가 위치하는 URL을 알아내는 방법이다.
 
+```js
+console.log(location.protocol, location.host, location.port, location.pathname, location.search, location.hash)
+```
 
+- location 객체는 URL을 의미에 따라서 별도의 프로퍼티로 제공하고 있다. ![image-20220331224420299](C:\Users\Son\AppData\Roaming\Typora\typora-user-images\image-20220331224420299.png)
 
+```js
+location.href = 'http://egoing.net';
+```
 
+- 아래 코드는 현재 문서를 http://egoing.net으로 이동한다.  (주소이동)
 
+```js
+location.reload();
+```
 
+- 아래는 현재 문서를 리로드하는 간편한 방법을 제공한다.
 
+## navigator
 
+```js
+console.dir(navigator);
+```
 
+- dir명령을 통해서 navigator이 객체의 모든 프로퍼티를 열람할 수 있다.
 
+```js
+console.dir(navigator.appName);
+```
 
+- 웹브라우저의 이름을 알수있다 IE는 Microsoft Internet Explorer/  파이어폭스, 크롬등은 Nescape로 표시함
 
+```js
+console.dir(navigator.appVersion);
+```
 
+- 브라우저의 현재 버전을 알수있다
 
-
-
-
-
-
-
-
-
+## 제어대상을 찾기
