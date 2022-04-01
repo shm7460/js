@@ -1103,6 +1103,235 @@ console.dir(navigator.appVersion);
 
 - querySelectorAll  관련된 모든 객체를 조회해준다.
 
+##  constructor.name 객체이름알기
+
+```html
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+    var li = document.getElementById('active');
+    console.log(li.constructor.name);              //HTMLLIElement 
+    var lis = document.getElementsByTagName('li'); 
+    console.log(lis.constructor.name);             //HTMLCollection
+</script>
+```
+
+- 즉 실행결과가 하나인 경우 HTMLLIELement, 복수인 경우 HTMLCollection을 리턴하고 있다. 
+
+```html
+<a id="anchor" href="http://opentutorials.org">opentutorials</a>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="list">JavaScript</li>
+</ul>
+<input type="button" id="button" value="button" />
+<script>
+    var target = document.getElementById('list');
+    console.log(target.constructor.name);           //HTMLLIElement
+ 
+    var target = document.getElementById('anchor');
+    console.log(target.constructor.name);           //HTMLAnchorElement
+ 
+    var target = document.getElementById('button');
+    console.log(target.constructor.name);              //HTMLInputElement
+ 
+</script>
+```
+
+- 엘리먼트의 종류에 따라서 리턴되는 객체가 조금씩 다르다 HTMLLIElement/HTMLAnchroElement/HTMLInputElement
+
+## Element.tagName 태그이름 알기(읽기전용)
+
+```html
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active" class="important current">JavaScript</li>
+</ul>
+<script>
+console.log(document.getElementById('active').tagName)    //li
+</script>
+```
+
+- 해당 엘리먼트의 태그 이름을 알아낸다. 태그 이름을 변경하지는 못한다.
+
+ ## Element.id 아이디 이름 알기 (변경가능)
+
+```html
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+var active = document.getElementById('active');
+console.log(active.id);                           //active
+active.id = 'deactive';  
+console.log(active.id);                           //deactive
+</script>
+```
+
+- 문서에서 id는 단 하나만 등장할 수 있는 식별자다. id의 값을 읽고 변경하는 방법을 보여준다. 
+
+## Element.className 클래스이름알기 
+
+```html
+ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+var active = document.getElementById('active');
+// class 값을 변경할 때는 프로퍼티의 이름으로 className을 사용한다.
+active.className = "important current";
+console.log(active.className);
+// 클래스를 추가할 때는 아래와 같이 문자열의 더한다.
+active.className += " readed"
+</script>
+```
+
+## Element.classList
+
+```js
+active.classList.add('marked');        //class추가
+active.classList.remove('important');  //class제거
+active.classList.toggle('current');    //class 추가,제거
+```
+
+- className에 비해서 훨씬 편리한 사용성을 제공함
+
+## attribute
+
+```js
+list.getAttribute("id")  // "title"
+```
+
+- 속성의 값을 가져온다 (id이름이 무엇인지 알려주고 있다.)
+
+```js
+list.setAttribute("id","main")  
+```
+
+- list의 id이름을 main으로 바꾼다
+
+```js
+list.removeAttribute("title")
+```
+
+- list값에 있는 내용을 없앤다 
+
+## Document 객체
+
+```js
+const li = document.createElement("li")
+```
+
+- document  객체의 주요 임무는 새로운 element를 생성해주는 역할이다
+
+## event
+
+ ```
+ <input type="button" onclick="alert(window.location)" value="alert(window.href)" />
+ ```
+
+- event target은 button태그이다.
+- event type은  click 이 이벤트 타입이다.
+- event handler는 이벤트가 발생했을 때 동작하는 코드를 의미한다.  `"alert(window.location)"`
+- 태그안에 이벤트가 속성으로 들어가있어서 인라인 방식이다.
+
+## addEventListener()
+
+```js
+const t = document.getElementById('target');
+    t.addEventListener('click', function(event){
+        alert(1);
+    });
+    t.addEventListener('click', function(event){
+        alert(2);
+    });
+```
+
+-  하나의 이벤트 대상에  복수의 동일 이벤트 타입 리스너를 등록할 수 있다
+
+```html
+<input type="button" id="target1" value="button1" />
+<input type="button" id="target2" value="button2" />
+<script>
+    var t1 = document.getElementById('target1');
+    var t2 = document.getElementById('target2');
+    function btn_listener(event){
+        switch(event.target.id){
+            case 'target1':
+                alert(1);
+                break;
+            case 'target2':
+                alert(2);
+                break;
+        }
+    }
+    t1.addEventListener('click', btn_listener);
+    t2.addEventListener('click', btn_listener);
+```
+
+- 이벤트 객체를 이용하면 복수의 엘리먼트에 하나의 리스너를 등록해서 재사용할 수 있다. 
+
+## preventDefault 이벤트 기본동작 취소
+
+ ```js
+ document.querySelector('a').addEventListener(
+ 'click', function(event)
+ {
+ if(document.getElementById('prevent').checked)
+ event.preventDefault();
+ }
+ );
+ ```
+
+-  이벤트 객체의 preventDefault 메소드를 실행하면 기본 동작이 취소된다. 
+
+**submit 동작취소**
+
+```html
+<form id="target" action="result.html">
+    <label for="name">name</label> <input id="name" type="name" />
+    <input type="submit" />
+</form>
+<script>
+var t = document.getElementById('target');
+t.addEventListener('submit', function(event){
+    if(document.getElementById('name').value.length === 0){
+        alert('Name 필드의 값이 누락 되었습니다');
+        event.preventDefault();
+    }
+});
+</script>
+```
+
+**change**
+
+```html
+<p id="result"></p>
+<input id="target" type="name" />
+<script>
+var t = document.getElementById('target');
+t.addEventListener('change', function(event){
+    document.getElementById('result').innerHTML=event.target.value;
+});
+</script>
+```
+
+- change는 폼 컨트롤의 값이 변경 되었을 때 발생하는 이벤트다.
+- `event.target.value;` 는 input에 작성한 내용을 말함.
+
+​      그래서 그값을 id가 result인  곳에 innerHTML으로 넣는다는 뜻 
+
+
+
 # jQuery
 
 ```js
@@ -1135,19 +1364,60 @@ $('#active').css('color', 'red').css('textDecoration', 'underline');
 
 - 둘다 같은 의미이고 위:js 아래:jQ이다.
 
+## jQuery 객체
 
+```js
+const list = $("li");
+list;                     // <li>hello</li>  (list는 jQuery의 객체를 가지고있다.)
+list.css("text-decoration","underline"); //list의 모든 객체의 element에게 텍스트 언더라인이 만들어진다.
+```
 
+- `$("li")` : jQuery 함수이다.
 
+```js
+list.css("text-decoration","underline").css("color","red");
+```
 
+- 밑줄이 쳐지고 색을 red가 된다 
 
+```js
+list.css("text-decoration");    //첫번째 객체만 적용된다 
+list.css("text-decoration","underline") // (가져오기,설정) 이기때문에 모든 객체가 적용된다
+```
 
+- `.css(    )` : 가져오기   / `.css( , )`: 설정
 
+## jQuery 속성제어 api
 
+```
+list.attr("title","hello")
+list.removeAttr('title'); // title 속성을 제거한다.
+```
 
+- list 변수안에 있는  내용을 hello로 바꾼다
+- jQuery 객체의 메소드 중 setAttribute, getAttribute에 대응되는 메소드는 attr이다. 또한 removeAttribute에 대응되는 메소드로는 removeAttr이 있다. 
 
+## jQuery 하위 element 선택
 
+```js
+$( "#active .marked").css( "background-color", "red" );
+```
 
+- 아이디가 active에 하위 element인 클래스가 marked인 것을 배경색을 red로 한다.
 
+find
+
+```js
+$( "#active").find('.marked').css( "background-color", "red" );
+```
+
+- find는 jQuery 객체 내에서 엘리먼트를 조회하는 기능을 제공한다. 위에코드와 같은 의미이다
+
+```js
+$('#active').css('color','blue').find('.marked').css( "background-color", "red" );
+```
+
+- find를 쓰는 이유는 체인을 끊지 않고 작업의 대상을 변경하고 싶을 때 사용한다. 
 
 
 
