@@ -1330,7 +1330,49 @@ t.addEventListener('change', function(event){
 
 ​      그래서 그값을 id가 result인  곳에 innerHTML으로 넣는다는 뜻 
 
+**마우스이벤트**
 
+```
+click
+클릭했을 때 발생하는 이벤트. 
+dblclick
+더블클릭을 했을 때 발생하는 이벤트
+mousedown
+마우스를 누를 때 발생
+mouseup
+마우스버튼을 땔 때 발생
+mousemove
+마우스를 움직일 때
+mouseover
+마우스가 엘리먼트에 진입할 때 발생
+mouseout
+마우스가 엘리먼트에서 빠져나갈 때 발생
+contextmenu
+컨텍스트 메뉴가 실행될 때 발생
+```
+
+```
+event.shiftKey
+event.altKey
+event.ctrlKey
+```
+
+```
+clientX
+clientY
+```
+
+## Json
+
+JSON(JavaScript Object Notation)의 약자로 JavaScript에서 객체를 만들 때 사용하는 표현식을 의미한다
+
+```js
+const man = {"height":170, "job":"student"};   //객체
+const member = ["철수", "영희", "길동"]         //배열
+```
+
+- 객체는 {  }중괄호로 만든다/ 값의 이름과 값은 :세미클론으로 구분한다/ 값과 값사이는 ,콤마로 구분한다.
+- 배열은 [ ]대괄호로 만든다/ 값과 값사이에는 ,콤마로 구분한다.
 
 # jQuery
 
@@ -1418,6 +1460,121 @@ $('#active').css('color','blue').find('.marked').css( "background-color", "red" 
 ```
 
 - find를 쓰는 이유는 체인을 끊지 않고 작업의 대상을 변경하고 싶을 때 사용한다. 
+
+## jQuery 이벤트
+
+```html
+<script>
+    // 순수하게 구현했을 때
+    const target = document.getElementById('pure');
+    if(target.addEventListener){
+        target.addEventListener('click', function(event){
+            alert('pure');
+        });
+    }
+ 
+    // jQuery를 사용했을 때
+    $('#jquery').on('click', function(event){
+        alert('jQuery');
+    })
+</script>
+```
+
+- 코드 분량에 큰차이가 있다. jQuery는 크로스 브라우징을 알아서 처리해주고, 이벤트를 보다 적은 코드로 구현할 수 있도록 해준다. 
+
+**on api**
+
+on의 기본적인 문법
+
+```js
+.on( events [, selector ] [, data ], handler(eventObject) )
+```
+
+- event : 등록하고자 하는 이벤트 타입을 지정한다. (예: "click")
+- selector : 이벤트가 설치된 엘리먼트의 하위 엘리먼트를 이벤트 대상으로 필터링함
+- data : 이벤트가 실행될 때 핸들러로 전달될 데이터를 설정함
+- handler : 이벤트 핸들러 함수
+
+selector
+
+```html
+<ul>
+    <li><a href="#">HTML</a></li>
+    <li><a href="#">CSS</a></li>
+    <li><a href="#">JavaScript</a></li>
+</ul>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('ul').on('click','a, li', function(event){
+        console.log(this.tagName);                       
+    })
+</script>
+```
+
+- ul 엘리먼트의 하위 엘리먼트 중에  a, li 엘리먼트들에 대해서만 이벤트가 발생한다.
+- css내용이담기 li를 클릭하면  실행결과 a,li가 나온다  ul태그는 안뜬다.
+
+다중 이벤트
+
+```HTML
+<input type="text" id="target" />
+<p id="status"></p>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('#target').on({
+        'focus' : function(e){
+ 
+        }, 
+        'blur' : function(e){
+             
+        }
+    })
+------------------------------------------------------다른방법----------------------------
+      $('#target').on('focus blur', function(e){
+        $('#status').html(e.type);
+    })
+------------------------------------------------------다른방법----------------------------
+   const handler = function(e){
+    $("status").html(e.type);
+}
+    $("#target").on("focus",handler).on("blur",handler);
+</script>
+```
+
+- focus, blur 이벤트를 적용함
+
+이벤트 제거
+
+```html
+<input type="text" id="target"></textarea>
+<input id="remove"  type="button" value="remove" />
+<p id="status"></p>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+  var handler = function(e){
+    $('#status').text(e.type+Math.random());
+  };
+  $('#target').on('focus blur', handler)
+  $('#remove').on('click' , function(e){
+    $('#target').off('focus blur', handler);
+    console.log(32);
+  })
+</script>
+```
+
+- 이벤트를 제거할 때는 off를 사용한다. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
