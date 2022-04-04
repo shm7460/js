@@ -913,7 +913,115 @@ https://nodejs.org/api/
 
 https://developers.google.com/apps-script/
 
+## 12. 함수_유효범위
 
+ ``` js
+ const vscope = 'global';       //전역변수
+ function fscope(){
+     const vscope = 'local';    //지역변수
+     alert(vscope);          
+ }
+ fscope();                   //local  
+ alert(vscope);             //global   
+ ```
+
+- 함수 밖에서 변수를 선언하면 그 변수는 전역변수가 된다. 
+- 전역변수는 에플리케이션 전역에서 접근이 가능한 변수다. (다시 말해서 어떤 함수 안에서도 그 변수에 접근 가능)
+-  같은 이름의 지역변수와 전역변수가 동시에 정의되어 있다면 지역변수가 우선한다는 것을 알 수 있다.
+- const 를 해줘야 그지역에서 지역 
+
+**지역변수 사용 예시**
+
+```js
+function a (){
+    var i = 0;
+}
+for(var i = 0; i < 5; i++){
+    a();
+    document.write(i);                //01234
+}                               
+```
+
+**익명함수를 호출함으로 전역변수 없애기**
+
+```js
+(function(){
+    var MYAPP = {}
+    MYAPP.calculator = {
+        'left' : null,
+        'right' : null
+    }
+    MYAPP.coordinate = {
+        'left' : null,
+        'right' : null
+    }
+    MYAPP.calculator.left = 10;
+    MYAPP.calculator.right = 20;
+    function sum(){
+        return MYAPP.calculator.left + MYAPP.calculator.right;
+    }
+    document.write(sum());
+}())
+```
+
+- `(function(){ 실핼코드 }( ))` :익명함수
+
+**자바스크립트의 지역변수는 함수에서만 유효하다**
+
+```js
+for(var i = 0; i < 1; i++){
+    var name = 'coding everybody';
+}
+alert(name);
+```
+
+- name 변수가 {}중괄호 안에 선언되었지만 밖에서도 호출이 가능하다 함수가 아니기 때문이다 
+
+**값으로서 함수**
+
+```js
+function a () {}      --->         const a = function(){}  //함수가 a라는 변수가됨
+```
+
+- JavaScript의 함수가 다른 언어의 함수와 다른 점은 함수가 값이 될 수 있다는 점이다.
+
+```js
+a = {
+    b:function(){
+    }
+};                    //객체안에 b라는 함수가 값으로 담겨져있다
+```
+
+-  함수는 객체의 값으로 포함될 수 있다. 이렇게 객체의 속성 값으로 담겨진 함수를 
+
+  **메소드**(method)라고 부른다.
+
+```js
+function cal(func, num){
+    return func(num)
+}
+function increase(num){
+    return num+1
+}
+alert(cal(increase, 1));     //2    
+```
+
+- 함수는 값이기 때문에 다른 함수의 인자로 전달 될수도 있다.
+- `alert(cal(increase, 1));`     => `alert(cal(2, 1));` -> 2(1) = 답2
+
+```js
+function cal(mode){
+    var funcs = {
+        'plus' : function(left, right){return left + right},
+        'minus' : function(left, right){return left - right}
+    }
+    return funcs[mode];
+}
+alert(cal('plus')(2,1));        //3
+alert(cal('minus')(2,1));       //1
+```
+
+- 함수는 함수의 리턴 값으로도 사용할 수 있다.
 
 # js for web
 
