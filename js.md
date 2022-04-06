@@ -594,8 +594,6 @@ function numbering() {
 numbering();
 ```
 
-
-
 **함수 출력(return)**
 
 return은 함수의 출력값으로 반환한다
@@ -612,8 +610,6 @@ alert(get_member1());
 ```
 
 - hey만 출력이 된다 
-
-
 
 **함수 입력 (인자)**
 
@@ -662,6 +658,10 @@ get_argument = function () {
 ```
 
 - 정의와 호출을 같이하는 함수 이고 이름이없는 익명함수이다 (일회성 함수)
+
+**apply**
+
+- 함수는 객체이다 객체는 속성을 가지고 그 속성의 값이 함수라면 메소드라고한다. 
 
 ## 함수_계산기
 
@@ -795,7 +795,7 @@ li.sort()                   // ['a', 'b', 'd', 'e', 'f']
 
 
 
- ## 9. 객체
+ ## 9. 객체 {}
 
 ```js
 const name ={"hey":10, "won":20, "jun":30};
@@ -873,6 +873,32 @@ const grades = {
 
 - 객체안에는 함수도 저장될수 있다
 
+**this**
+
+ this는 전역객체인 window와 같다.
+
+```js
+function func(){
+    if(window === this){
+        document.write("window === this");
+    }
+}
+func(); //window === this
+```
+
+객체의 소속인 메소드의(함수) this는 그 객체(o{ }) 를 가르킨다. 
+
+```js
+var o = {
+    func : function(){
+        if(o === this){
+            document.write("o === this");
+        }
+    }
+}
+o.func();              //o === this
+```
+
 **변수 this**
 
 ```js
@@ -887,11 +913,129 @@ const grades = {
 grades.show();
 ```
 
-- this: 자신이 속한 함수가 속해 있는 객체를 가리키는 변수이다. (this = grades)
+- 자신이 속한 함수가 속해 있는 객체를 가리키는 변수이다. (this = grades)
+
+**생성자와 new**
+
+객체란 서로 연관된 변수와 함수를 그룹핑한 그릇이라고 할 수 있다. 객체 내의 변수를 프로퍼티(property) 함수를 메소드(method)라고 부른다
+
+```js
+var person = {}
+person.name = 'egoing';
+person.introduce = function(){
+    return 'My name is '+this.name;
+}                                   //->객체안에 함수가있기때문에 이건 메소드이다.
+document.write(person.introduce());
+```
+
+- name과 introduce는 person객체안의 속성(property)이다.
+
+- this는 함수가 속해있는 객체를 뜻함 => `var person = {this}`
+- this.name =person.name =>egoing이다.
+- 이코드는 객체를 만드는 과정이 분산되어있다 안좋은 예시이다
+
+```js
+var person = {
+    'name' : 'egoing',
+    'introduce' : function(){
+        return 'My name is '+this.name;
+    }
+}
+document.write(person.introduce());
+```
+
+- var person = { 속성과 메소드가 담겨있다.}
+
+new
+
+```js
+const p = new person()
+p                       //person{}
+```
+
+- new가 붙음으로 함수가 아니라 객체 생성자가된다
+- 그래서 p는 비어있는 객체가 만들어졌다. -> person{}
+
+```js
+function Person(name){
+    this.name = name;
+    this.introduce = function(){
+        return 'My name is '+this.name; 
+    }   
+}
+var p1 = new Person('egoing');
+document.write(p1.introduce()+"<br />");
+ 
+var p2 = new Person('leezche');
+document.write(p2.introduce());
+```
+
+- 생성자 함수는 일반함수와 구분하기 위해서 첫글자를 대문자로 표시한다.->new Person
+
+## 10. 상수
+
+상속은 객체의 로직을 그대로 물려 받는 또 다른 객체를 만들 수 있는 기능을 의미한다. 
+
+```js
+function Person(name){
+    this.name = name;
+}
+Person.prototype.name=null;
+Person.prototype.introduce = function(){
+    return 'My name is '+this.name; 
+}
+ 
+function Programmer(name){
+    this.name = name;
+}
+Programmer.prototype = new Person();
+ 
+var p1 = new Programmer('egoing');
+document.write(p1.introduce()+"<br />");
+```
+
+- Programmer이라는 생성자를 만들었다. 그리고 이 생성자의 prototype과 Person의 객체를 연결했더니 Programmer 객체도 메소드 introduce를 사용할 수 있게 되었다. 
+
+- Programmer가 Person의 기능을 상속하고 있는 것이다. 단순히 똑같은 기능을 갖게 되는 것이라면 상속의 의의는 사라질 것이다. 부모의 기능을 계승 발전할 수 있는 것이 상속의 가치다.
+
+- Programmer는 Person의 기능을 가지고 있으면서 Person이 가지고 있지 않은 기능인 메소드 coding을 가지고 있다. 
+
+**prototype 체인 (원형)**
+
+```js
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+Super.prototype = new Ultra();
+ 
+function Sub(){}
+Sub.prototype = new Super();    //상속받고 싶은 객체를 가져오는방법 :new 객체이름()
+Sub.prototype.ultraProp = 2;
+ 
+var o = new Sub();
+
+console.log(o.ultraProp);   // 2
+```
+
+- 생성자 Sub를 통해서 만들어진 객체 o가 Ultra의 프로퍼티 ultraProp에 접근 가능한 것은 prototype 체인으로 Sub와 Ultra가 연결되어 있기 때문이다. 내부적으로는 아래와 같은 일이 일어난다.
+
+1. 객체 o에서 ultraProp를 찾는다.
+2. 없다면 Sub.prototype.ultraProp를 찾는다.
+3. 없다면 Super.prototype.ultraProp를 찾는다.
+4. 없다면 Ultra.prototype.ultraProp를 찾는다.
+
+prototype는 객체와 객체를 연결하는 체인의 역할을 하는 것이다. 이러한 관계를 prototype chain이라고 한다.
+
+```
+Super.prototype = Ultra.prototype 으로하면 안된다. 이렇게하면 Super.prototype의 값을 변경하면 그것이 Ultra.prototype도 변경하기 때문이다. Super.prototype = new Ultra();는 Ultra.prototype의 원형으로 하는 객체가 생성되기 때문에 new Ultra()를 통해서 만들어진 객체에 변화가 생겨도 Ultra.prototype의 객체에는 영향을 주지 않는다.
+```
 
 
 
-## 10. 라이브러리 사용
+
+
+## 11. 라이브러리 사용
 
 -jQuery
 
@@ -899,7 +1043,7 @@ https://jquery.com/
 
 
 
-## 11. UI와 API
+## 12. UI와 API
 
 - 웹브라우저 API
 
@@ -913,7 +1057,7 @@ https://nodejs.org/api/
 
 https://developers.google.com/apps-script/
 
-## 12. 함수_유효범위
+## 13. 함수_유효범위
 
  ``` js
  const vscope = 'global';       //전역변수
@@ -1022,6 +1166,124 @@ alert(cal('minus')(2,1));       //1
 ```
 
 - 함수는 함수의 리턴 값으로도 사용할 수 있다.
+
+## 14.외부함수 내부함수
+
+```js
+function outter(){
+    var title = 'coding everybody';  //<-지역변수
+    function inner(){        
+        alert(title);
+    }
+    inner();
+}
+outter();
+```
+
+- 위의 예제에서 함수 outter의 내부에는 함수 inner가 정의 되어 있다. 함수 inner를 내부 함수라고 한다.
+
+- 내부함수 inner에서 title을 호출했을 때 외부함수인 outter의 지역변수에 접근할 수 있음을 보여준다.
+
+```js
+function outter(){
+    var title = 'coding everybody';  
+    return function(){        
+        alert(title);
+    }
+}
+inner = outter();
+inner();          // coding everybody
+```
+
+- 행이 8행으로 넘어오면 outter 함수는 실행이 끝났기 때문에 이 함수의 지역변수는 소멸되는 것이 자연스럽다. 하지만 8행에서 함수 inner를 실행했을 때 coding everybody가 출력된 것은 외부함수의 지역변수 title이 소멸되지 않았다는 것을 의미한다.
+
+- 클로저란 내부함수가 외부함수의 지역변수에 접근 할 수 있고, 
+
+  외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 않는 특성을 의미한다.
+
+## 15. arguments
+
+arguments: 함수를 호출할 때 입력한 인자가 담겨있다. 아래 예제를 보자. 결과는 10이다.
+
+```js
+function a(매개변수){
+}
+a(인자1,인자2)
+```
+
+-  매개변수에 들어가는 값이 인자이다
+- argument.length : 2   =>위에결과
+- a.length:1  =>위에결과
+
+## 16. 표준 내장 객체
+
+- Object
+- Function
+- Array
+- String
+- Boolean
+- Number
+- Math
+- Date
+- RegExp
+
+## 17. 복제
+
+```js
+const a = 1;
+const b = a;
+b = 2;
+console.log(a); // 1
+```
+
+- 값을 변경한 것은 변수 b이기 때문에 변수 a에 담겨있는 값은 그대로이다
+- ![img](https://s3.ap-northeast-2.amazonaws.com/opentutorials-user-file/module/532/2226.png)
+
+## 18. 참조  !!
+
+```js
+var a = {'id':1};
+var b = a;
+b.id = 2;
+console.log(a.id);  // 2
+```
+
+- 변수 b에 담긴 객체의 id 값을 2로 변경했을 뿐인데 a.id의 값도 2가 된 것이다. 이것은 변수 b와 변수 a에 담긴 객체가 서로 같다는 것을 의미하다
+
+- ![img](https://s3.ap-northeast-2.amazonaws.com/opentutorials-user-file/module/532/2227.png)
+
+
+
+**함수와 참조**
+
+```js
+var a = 1;
+function func(b){
+    b = 2;
+}
+func(a);
+console.log(a);     //1
+----------------------------
+var a = {'id':1};
+function func(b){
+    b = {'id':2};
+}
+func(a);
+console.log(a.id);  // 1
+```
+
+- 값을 변경한 것은 변수 b이기 때문에 변수 a에 담겨있는 값은 그대로이다
+
+```js
+var a = {'id':1};
+function func(b){
+    b.id = 2;
+}
+func(a);
+console.log(a.id);  // 2
+```
+
+
 
 # js for web
 
