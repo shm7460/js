@@ -43,8 +43,20 @@
   - 랜덤한숫자에 10 곱하기를 하면 10보다 아래인 숫자가 나오고 거기에 반올림을 하면 
 
     10미만의 숫자가 랜덤으로 나온다.
+  
+  ```js
+  String(3)         // "3" 문자 3이된다.
+  Number("123")    //123 숫자 123이된다. 
+  Number("안녕")    //NaN 
+  Number(true)     //1
+  Number(false)    //0 
+  ```
 
-    
+- String() : 문자형으로 변환 / Number() :숫자형으로 변환 `Number("문자")//Nan` / Boolean(): 불린형으로 변환
+
+- prompt에 입력을 하면 숫자를 입력하더라도 문자형을 나오게된다.
+
+  
 
 **문자 (string)**
 
@@ -68,7 +80,7 @@
 
   - 문자안에 똑같은 기호를 사용해야되면 그 기호앞에 역슬래시 `\`를 넣어준다
 
-    그러면 역슬래시 뒤에 오는 정보는 방해받지 않고 원하는 문장이 출력된다
+    그러면 역슬래시 뒤에 오는 정보는 방해받지 않고 원하는 문장이 출력+된다
 
      `hello min's nice meet you`
 
@@ -112,24 +124,56 @@
 
   - 순서는 0부터 시작하기 때문에 4라는 값이 나온다
 
+- ```js
+  const a = "나는 ";
+  const b = "입니다.";
+  const age = 30;
+  console.log(a+age+"살"+b)  // "나는 30살 입니다."
+  ```
 
+- - 숫자와 문자를 더해주면 문자로 변경됨
 
 ## 2. 변수
 
 - 변수에는 숫자,문자,어떠한 데이터든 들어갈수있다 
 
 - ```js
-  var a = 1  
+  const a = 1  
   a          // 숫자 1값이 나온다
   a+2        // 숫자 3값이 나온다
   ```
 
 - ```js
-  var first = "hello"
+  const first = "hello"
   alert(first+" mine")   //hello mine 이라는 문자가 출력된다
   ```
 
-  
+ - 변수 first 에 hello라는 단어가 있음
+
+  ``` js
+  const SPEED_LIMIT = 50;  
+  let speedLimit = 50;
+  speedLimit = 80;       //let은 최초변수만 붙여주면된다
+  ```
+
+ - const: 절대로 바뀌지 않는 상수로써 변하지않는 값을설정할때 /let: 변할수 있는 값을선언할때
+ - 변수의 첫글자는 숫자가 될수없다
+
+**문자형태**
+
+```js
+const name1 = "mike"
+const name1 = 'mike'
+const name1 = `mike`                    //"",'',``
+----------------------------------------------------------------------------
+const message = "i'm a boy."
+const message2 = 'i\'m a boy.'         //``백틱을 사용하고 싶으면 역슬래쉬를 사용한다
+----------------------------------------------------------------------------
+const message3 = `my name is ${name1}`//문자열 내부에 변수를 표현하고 싶을때 ``백틱 사용하면 됨
+console.log(message3)                //"my name is mike"
+```
+
+- 문자열 내부에 변수를 표현할때는 `` 백틱을 사용해야한다.
 
 ## 3.주석
 
@@ -313,6 +357,14 @@ alert(1==1)  //true라는 값이나옴
 
   - prompt 는 어떠한 값을 사용자로 부터 받을수있는 기능
 
+**prompt**
+
+```js
+const name = prompt("예약일을 입력해줴요.","2022-04-") 
+```
+
+- prompt(인수,인수(값을 미리 넣을수 있음))
+
 **아이디 일치 여부 코드**
 
 - ```js
@@ -373,6 +425,7 @@ alert(1==1)  //true라는 값이나옴
   ```
 
   - 하나라도 true가 있으면 실행이된다
+  - 첫번쨰 true를 발견하는 즉시 평가를 멈춤
 
 **논리연산자 응용**
 
@@ -394,9 +447,51 @@ alert(1==1)  //true라는 값이나옴
 - ```js
   if (!false && !false){
       alert("안녕")}          //안녕
+  -----------------------------------------------
+  const age = prompt("나이가 어떻게되나요?");
+  const isAdult = age>19;
+  if(!isAdult){
+      console.log("돌아가..")
+  }                                //10을 입력하면 false이지만 !때문에 true가되어 실행된다.
   ```
 
   - !false  ==>true이기때문에 둘다 true가 되어서  안녕이라는 경고문이 뜬다.
+
+```js
+const name = "Mike";
+const age = 30;
+if(name=== "Tom" || age > 190){
+console.log("통과");             //"통과"
+}
+```
+
+- 이름이 Tom이거나, 성인이면 통과 (or연산자)
+
+```js
+const name = "Mike";
+const age = 30;
+if(name=== "Tom" && age > 190){
+console.log("통과");            
+}else{
+console.log("불통")
+}                                     //"불통"
+```
+
+- 이름이 Tom이고, 성인이면 통과 (and연산자)
+
+```js
+const gender = "M"
+const name = "hey"
+const isAdult = true
+if(gender === "M" && (name === "Mike" || isAdult)){
+console.log("통과 ")
+}else{
+console.log("불통")
+}
+                            //"통과"
+```
+
+- 우선순위는 : and>or
 
 **boolean의 대체재**
 
@@ -445,7 +540,7 @@ alert(1==1)  //true라는 값이나옴
 ```
 
 - 조건문인 (i < 10)이 true일경우 계속실행되고 false일 경우 실행을 멈춘다
-- +i+ 하면 숫자도 같이나온다 
+- `+i+` 하면 숫자도 같이나온다 
 
 **for 반복문법**
 
@@ -455,10 +550,28 @@ document.write("coding everybody" + i + "<br/>");
 }
 ```
 
-- 조건에(초기화 파트; 언제까지 반복할것인지; 반복실행 조건 )을 넣어주면된다 
+- 조건에(초기값; 언제까지 반복할것인지 조건 ; 반복문 한번 실행된후 작업)을 넣어주면된다 
 - 마지막에는 세미클론;넣으면안됨
-
 - `i = i + 1`와 `i++`는 같은 의미 이다 .(의미는 구문이 실행될때 마다 1씩증가한다는 뜻)
+
+```js
+for(let i = 0; i<10; i++){
+console.log(i+1)
+} 
+/*
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10*/
+```
+
+
 
 **i++ 와 ++i의 차이점**
 
@@ -571,7 +684,7 @@ for (let i = 0; i < 10; i++) {
 
 ## 7. 함수
 
-**함수**:  function 함수명 ( 인자) { 코드 return 반환값  }
+**함수**:  function 함수명 (매개변수) { 코드 return 반환값  }
 
 ```js
 function numbering() {
@@ -582,6 +695,16 @@ numbering();
 
 - 함수 호출하기 
 - 여러 맥락에서 호출을 하면 사용할수있다 (반복문은 그안에서만 실행된다)  =재사용성
+
+```js
+function sayHello(name){
+const msg = `helllo, ${name}`;
+}
+sayHello("Mike")    //"hello, Mike"
+sayHello("jun")    //"hello, jun"
+```
+
+
 
 ```js
 function numbering() {
@@ -803,7 +926,7 @@ name                                       //{hey: 10, won: 20, jun: 30}
 ```
 
 - index를 만들수있다 (hey,won,jun)
-- key와 value 이다.
+- key와 value 이다.  key:value,
 
 **다른방법들로 object 만들기**
 
@@ -825,7 +948,21 @@ name                 //{hey: 10, won: 20, jun: 30}
 
 - { }와 new Object( )는 같은 의미이다.
 
-  
+**객체 접근**
+
+```js
+const name ={"hey":10, "won":20, "jun":30};
+name.hey              //10
+name["hey"]           //10
+-----추가하는법-----
+name.hairColor = "black";  //접근하는 방식과 같이 하면됨
+-----삭제하는법-----
+delete name.hairColor;    //  앞에 delete를 작성하면됨 
+```
+
+- .점을 사용하거나 대괄호[]를 사용한다
+
+
 
 **객체의 값을 가져오는 방법**
 
@@ -847,6 +984,19 @@ for (const name in grades) {
 
 - `for (const name in grades)`에서 name은 grades배열에서 key값을 담는다 (hey,hello,hi)
 - `grades[name]`는 객체에 저장된  value값을 담는다.
+
+```js
+ const mike = {
+        name: "mike",
+        age: 30,
+      };
+      for (x in mike) {
+        alert(mike[x]);
+      }
+```
+
+- mike[x] : mike,30이 나온다 =>value값이다
+- x: name,age 가 나온다 =>key값이다.
 
 
 
@@ -914,6 +1064,7 @@ grades.show();
 ```
 
 - 자신이 속한 함수가 속해 있는 객체를 가리키는 변수이다. (this = grades)
+- 메소드에서는 this를 활용하는 것이 좋다.
 
 **생성자와 new**
 
@@ -1649,6 +1800,28 @@ const t = document.getElementById('target');
 ```
 
 - 이벤트 객체를 이용하면 복수의 엘리먼트에 하나의 리스너를 등록해서 재사용할 수 있다. 
+
+**switch문**
+
+```js
+ let fruit = prompt("어떤 과일을 원하시나요?");
+      switch (fruit) {
+        case "사과":
+          alert("100원입니다.");
+          break;
+        case "바나나":
+          alert("200원입니다.");
+          break;
+        case "포도":
+        case "수박":
+          alert("200원입니다.");
+          break;
+        default:
+          alert("그런과일은 없습니다.");
+      }
+```
+
+- 여러종류의 상황을 나타낼수 있다.
 
 ## preventDefault 이벤트 기본동작 취소
 
