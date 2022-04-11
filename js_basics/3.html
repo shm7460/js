@@ -8,29 +8,77 @@
   </head>
   <body>
     <script>
-      //   let fruit = prompt("어떤 과일을 원하시나요?");
-      //   switch (fruit) {
-      //     case "사과":
-      //       alert("100원입니다.");
-      //       break;
-      //     case "바나나":
-      //       alert("200원입니다.");
-      //       break;
-      //     case "포도":
-      //     case "수박":
-      //       alert("200원입니다.");
-      //       break;
-      //     default:
-      //       alert("그런과일은 없습니다.");
-      //   }
+      //   let a = "age";
+      //   const user = {
+      //     name: "hye",
+      //     [a]: 30, //Computed property(계산된 프로퍼티)
+      //   };
+      //   console.log(user[a]);  //30
 
-      const mike = {
-        name: "mike",
-        age: 30,
-      };
-      for (x in mike) {
-        alert(mike[x]);
+      //   const user = {
+      //     name: "mike",
+      //     age: 30,
+      //   };
+      //   const newUser = Object.assign({}, user);
+      //   console.log(newUser);
+
+      //   const user = {
+      //     name: "mike",
+      //   };
+      //   const info1 = {
+      //     age: 30,
+      //   };
+      //   const info2 = {
+      //     gender: "male",
+      //   };
+      //   const newUser = Object.assign(user, info1, info2);
+      //   console.log(newUser);
+
+      //   const user = {
+      //     name: "mike",
+      //     age: 30,
+      //     gender: "male",
+      //   };
+      //   const newUser = Object.entries(user);
+      //   console.log(newUser);
+
+      //   const arr = [
+      //     ["name", "mike"],
+      //     ["age", 30],
+      //     ["gender", "male"],
+      //   ];
+      //   const newUser = Object.fromEntries(arr);
+      //   console.log(newUser);
+
+      //   let n = "name";
+      //   let a = "age";
+
+      //   const user = {
+      //     [n]: "mike",
+      //     [a]: 30,
+      //     [1 + 4]: "계산",
+      //   };
+      //   console.log(user);
+
+      //   function makeObj(key, val) {
+      //     return {
+      //       [key]: val,
+      //     };
+      //   }
+      //   const obj = makeObj("성별", "male");
+      //   console.log(obj);
+
+      function hasCola(str) {
+        if (str.indexOf("콜라") > -1) {
+          console.log("금칙어가 있습니다.");
+        } else {
+          console.log("통과");
+        }
       }
+      //0부터는 콜라가 포함된다
+      hasCola("와 사이다가 짱이야!"); //콜라단어가 없으면 -1로 인식함
+      hasCola("콜라가 최고야"); //true이기때문에 0값이나온다
+      hasCola("콜라"); //true이기때문에 0값이나온다
     </script>
   </body>
 </html>

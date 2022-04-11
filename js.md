@@ -125,6 +125,23 @@
   - 순서는 0부터 시작하기 때문에 4라는 값이 나온다
 
 - ```js
+  function hasCola(str) {
+          if (str.indexOf("콜라") > -1) {
+            console.log("금칙어가 있습니다.");
+          } else {
+            console.log("통과");
+          }
+        }
+        //0부터는 콜라가 포함된다
+        hasCola("와 사이다가 짱이야!"); //콜라단어가 없으면 -1로 인식함
+        hasCola("콜라가 최고야"); //true이기때문에 0값이나온다
+        hasCola("콜라"); //true이기때문에 0값이나온다
+  ```
+
+  - 콜라단어가 있으면 0이라고 인식하고 
+  - (str.includes("콜라"))  라고 하면 콜라가 있는지 없는지만 반환한다.
+
+- ```js
   const a = "나는 ";
   const b = "입니다.";
   const age = 30;
@@ -132,6 +149,14 @@
   ```
 
 - - 숫자와 문자를 더해주면 문자로 변경됨
+
+- ```js
+  let desc = "abcdefg"
+  desc.slice(2) //"cdefg"
+  desc.slice(0,5) //"abcde"
+  ```
+
+  - str.slice(n,m) n:시작점이고 m:없으면 끝까지 양수면 그숫자까지(포함하지않음)  음수면 끝에서부터
 
 ## 2. 변수
 
@@ -1433,6 +1458,177 @@ function func(b){
 func(a);
 console.log(a.id);  // 2
 ```
+
+## 19.예시
+
+**생성자 함수** 만드는 방법
+
+```js
+ function Item(title, price) {
+        this.title = title;
+        this.price = price;
+        this.showPrice = function () {
+          console.log(`가격은 ${price}원 입니다.`);
+        };
+      }
+      const Item1 = new Item("인형", 3000);
+      const Item2 = new Item("가방", 4000);
+      const Item3 = new Item("신발", 5000);
+
+      console.log(Item1, Item2, Item3);
+      Item3.showPrice();   //가격은 5000원 입니다.
+```
+
+- 생성자 함수의 변수의 첫글자는 대문자로 설정한다.   `function Item`
+
+- new 연산자를 사용해서 호출해야됨
+- 비슷한 객체를 여러개만들때 유용함
+
+**Computed property**(계산된 프로퍼티)
+
+```js
+    let a = "age";
+      const user = {
+        name: "hye",
+        [a]: 30, //Computed property(계산된 프로퍼티)
+      };
+      console.log(user[a]);  //30
+```
+
+```js
+ let n = "name";
+      let a = "age";
+
+      const user = {
+        [n]: "mike",
+        [a]: 30,
+        [1 + 4]: "계산",
+      };
+      console.log(user);
+```
+
+- 활용하기
+
+```js
+function makeObj(key, val) {
+        return {
+          [key]: val,
+        };
+      }
+      const obj = makeObj("성별", "male");
+      console.log(obj);                    //{성별: 'male'}
+```
+
+- 어떤 키값과 값이 올지 모를때 사용하면 됨
+
+**Object.assign()** (객체 복제)
+
+```js
+const user = {
+        name: "mike",
+        age: 30,
+      };
+      const newUser = Object.assign({}, user);
+      console.log(newUser);
+```
+
+- `Object.assign({초기값}, 병합할 객체);` =>`{ }+{name: "mike",age: 30,};`
+- 결론 { }에 user객체가 병합된다는 뜻 
+- user 객체와  newUser 객체는 같은 객체가 아님, 복제는 했지만 서로 다름
+
+```js
+const user = {
+        name: "mike",
+        age: 30,
+      };
+      const newUser = Object.assign({gender:"male"}, user);
+      console.log(newUser);
+```
+
+-   console.log(newUser); =>  `name: "mike", age: 30, gender: "male",`
+- user객체와 {gender:"male"} 이 결합됨
+- key가 같으면 덮어쓰게됨
+
+```js
+ const user = {
+        name: "mike",
+      };
+      const info1 = {
+        age: 30,
+      };
+      const info2 = {
+        gender: "male",
+      };
+      const newUser = Object.assign(user, info1, info2);
+      console.log(newUser); 
+```
+
+- 결론 : **age**: 30**gender**: "male"**name**: "mike"
+- user 객체에 info1객체와 info2객체를 병합한다.
+
+**Object.keys()** (키를 배열로 반환함)
+
+```js
+const user = {
+        name: "mike",
+        age: 30,
+        gender: "male",
+      };
+      const newUser = Object.keys(user);
+      console.log(newUser);  
+```
+
+- ['name', 'age', 'gender']
+
+**Object.values()** (값 배열 반환)
+
+```js
+ const user = {
+        name: "mike",
+        age: 30,
+        gender: "male",
+      };
+      const newUser = Object.values(user);
+      console.log(newUser);
+```
+
+- ['mike', 30, 'male']
+
+ **Object.entries()** (키/값을 배열로 반환)
+
+```js
+const user = {
+        name: "mike",
+        age: 30,
+        gender: "male",
+      };
+      const newUser = Object.entries(user);
+      console.log(newUser);
+```
+
+- [['name', 'mike'],['age', 30],['gender', 'male']]
+
+**Object.fromEntries()** (키/값 배열을 객체로 변환)
+
+```js
+ const arr = [
+        ["name", "mike"],
+        ["age", 30],
+        ["gender", "male"],
+      ];
+      const newUser = Object.fromEntries(arr);
+      console.log(newUser);
+```
+
+- {age: 30, gender: "male", name: "mike" } 객체로 변환해줌
+
+
+
+
+
+
+
+
 
 
 
