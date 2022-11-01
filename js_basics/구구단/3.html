@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const A = Number(prompt("숫자A를 입력하세요"));
+      const B = prompt("연산자를 입력하세요 ex)+,-,*,/");
+      const C = Number(prompt("숫자B를 입력하세요"));
+
+      function promptCa(first, operator, second1) {
+        if (operator === "+") {
+          alert(first + second);
+        } else if (operator === "-") {
+          alert(first - second);
+        } else if (operator === "*") {
+          alert(first * second);
+        } else {
+          alert(first / second);
+        }
+      }
+
+      promptCa(A, B, C);
+    </script>
+  </body>
+</html>

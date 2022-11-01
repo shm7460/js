@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dark Mode Test</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1><a href="index.html">WEB</a></h1>
+
+    <input type="button" value="darkMode" onclick="darkMode(this);" />
+
+    <ol>
+      <li><a href="https://www.nomadcoders.co">노마드코더</a></li>
+      <li><a href="https://www.naver.com">네이버</a></li>
+      <li><a href="https://www.github.com/ryanlee5646">혜미니 깃헙</a></li>
+    </ol>
+    <h2>자바스크립트 다크모드 구현해보기</h2>
+    <p>1. input 태그에 type:버튼, value 활용</p>
+    <p>2. 함수 활용</p>
+    <p>3. 반복문 활용</p>
+  </body>
+  <script>
+    function darkMode(self) {
+      const body = document.querySelector("body");
+      const alist = document.querySelectorAll("a");
+      if (self.value === "darkMode") {
+        body.style.backgroundColor = "black";
+        body.style.color = "white";
+        self.value = "whiteMode";
+        let i = 0;
+        while (i < alist.length) {
+          alist[i].style.color = "powderblue";
+          i = i + 1;
+        }
+      } else {
+        body.style.backgroundColor = "white";
+        body.style.color = "black";
+        self.value = "darkMode";
+        let i = 0;
+        while (i < alist.length) {
+          alist[i].style.color = "blue";
+          i = i + 1;
+        }
+      }
+    }
+  </script>
+</html>
